@@ -14,22 +14,28 @@ const TodoList: React.FC = () => {
 
   const addMutation = useMutation({
     mutationFn: addTodo,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries(['todos']);
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['todos'],
+      });
     },
   });
 
   const deleteMutation = useMutation({
     mutationFn: deleteTodo,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries(['todos']);
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['todos'],
+      });
     },
   });
 
   const updateMutation = useMutation({
     mutationFn: updateTodo,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries(['todos']);
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['todos'],
+      });
     },
   });
 
