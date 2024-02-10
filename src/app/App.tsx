@@ -6,7 +6,7 @@ const App: React.FC = () => {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="sm">
+      <Container maxWidth="lg">
         <h1>ToDo List</h1>
         <TodoList />
       </Container>

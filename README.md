@@ -1,30 +1,34 @@
-# React + TypeScript + Vite
+# TodoList Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Описание
 
-Currently, two official plugins are available:
+Это простое приложение списка дел (TodoList), которое позволяет пользователям управлять своими ежедневными задачами. Приложение поддерживает добавление новых задач, их редактирование, удаление и категоризацию по статусу выполнения: новая, в процессе и выполненная.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Технологии
 
-## Expanding the ESLint configuration
+- React для построения пользовательского интерфейса.
+- Material-UI для стилизации компонентов.
+- React Query для управления состоянием серверных запросов.
+- TypeScript для статической типизации.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Основные компоненты
 
-- Configure the top-level `parserOptions` property like this:
+- `App.tsx`: Главный компонент, который рендерит `TodoList`.
+- `TodoList.tsx`: Компонент, отображающий список задач и управляющий их состоянием.
+- `TodoItem.tsx`: Компонент для отдельной задачи, позволяющий редактировать и удалять.
+- `mockApi.ts`: Модуль, имитирующий API для работы с задачами.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Запуск проекта
+
+Для запуска проекта выполните следующие шаги:
+
+```bash
+npm install     # Установка зависимостей
+npm run dev     # Запуск сервера разработки
 ```
+## Структура проекта
+Проект организован следующим образом:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- `src/app`: Главный компонент приложения.
+- `src/features/todoList/components`: Компоненты, связанные со списком задач.
+- `src/shared/api`: Имитация API для работы с данными.

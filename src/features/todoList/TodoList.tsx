@@ -1,9 +1,10 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Container } from '@mui/material';
+import { Container, Grid, Paper, Typography } from '@mui/material';
 import AddTodoForm from './components/AddTodoForm';
 import TodoItem from './components/TodoItem';
 import { fetchTodos, addTodo, deleteTodo, updateTodo } from '../../shared/api/mockApi';
+
 
 const TodoList: React.FC = () => {
   const queryClient = useQueryClient();
@@ -47,6 +48,10 @@ const TodoList: React.FC = () => {
     return <div>Error: {error instanceof Error ? error.message : 'Unknown error'}</div>;
   }
 
+  if (!todos) {
+    return <div>No todos found.</div>;
+  }
+
   const handleAdd = (title: string) => {
     addMutation.mutate(title);
   };
@@ -59,21 +64,48 @@ const TodoList: React.FC = () => {
     updateMutation.mutate({ id, title, status });
   };
 
+  const todosByStatus = (status: 'new' | 'in_progress' | 'completed') => {
+    return todos.filter(todo => todo.status === status);
+  };
+
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="lg">
       <AddTodoForm onAdd={handleAdd} />
-      {todos?.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          id={todo.id}
-          title={todo.title}
-          status={todo.status}
-          onDelete={handleDelete}
-          onUpdate={handleUpdate}
-        />
-      ))}
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <Typography className="TodoList-title" variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            New
+          </Typography>
+          <Paper className="TodoList-paper" elevation={3}>
+            {todosByStatus('new').map((todo) => (
+              <TodoItem key={todo.id} {...todo} onDelete={handleDelete} onUpdate={handleUpdate} />
+            ))}
+          </Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Typography className="TodoList-title" variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            In Progress
+          </Typography>
+          <Paper className="TodoList-paper" elevation={3}>
+            {todosByStatus('in_progress').map((todo) => (
+              <TodoItem key={todo.id} {...todo} onDelete={handleDelete} onUpdate={handleUpdate} />
+            ))}
+          </Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Typography className="TodoList-title" variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Completed
+          </Typography>
+          <Paper className="TodoList-paper" elevation={3}>
+            {todosByStatus('completed').map((todo) => (
+              <TodoItem key={todo.id} {...todo} onDelete={handleDelete} onUpdate={handleUpdate} />
+            ))}
+          </Paper>
+        </Grid>
+      </Grid>
     </Container>
   );
 };
+
 
 export default TodoList;
