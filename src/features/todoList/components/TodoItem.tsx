@@ -26,8 +26,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ id, title, onDelete, onUpdate, stat
     setNewTitle(title);
   };
   const handleSave = () => {
-    const nextStatus = getNextStatus(status);
-    onUpdate(id, newTitle, nextStatus);
+    onUpdate(id, newTitle, status);
     setIsEditing(false);
   };
 
