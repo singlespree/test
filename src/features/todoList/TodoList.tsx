@@ -55,8 +55,8 @@ const TodoList: React.FC = () => {
     deleteMutation.mutate(id);
   };
 
-  const handleUpdate = (id: number, title: string) => {
-    updateMutation.mutate({ id, title });
+  const handleUpdate = (id: number, title: string, status: 'new' | 'in_progress' | 'completed') => {
+    updateMutation.mutate({ id, title, status });
   };
 
   return (
@@ -67,6 +67,7 @@ const TodoList: React.FC = () => {
           key={todo.id}
           id={todo.id}
           title={todo.title}
+          status={todo.status}
           onDelete={handleDelete}
           onUpdate={handleUpdate}
         />
